@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 {
     // chip8 interpreter
     struct chip8 chip8;
+    chip8_init(&chip8);
     
     /* check the memory */
     // chip8_memory_set(&chip8.memory, 0x400, 'Z');
@@ -62,7 +63,7 @@ int main(int argc, char *argv[])
                 {
                     char key = event.key.keysym.sym;
                     int vkey = chip8_keyboard_map(keyboard_map, key);
-    
+
                     if (vkey != -1)
                     {
                         chip8_keyboard_down(&chip8.keyboard, vkey);
@@ -73,7 +74,7 @@ int main(int argc, char *argv[])
                 {
                     char key = event.key.keysym.sym;
                     int vkey = chip8_keyboard_map(keyboard_map, key);
-    
+
                     if (vkey != -1)
                     {
                         chip8_keyboard_up(&chip8.keyboard, vkey);
