@@ -5,6 +5,12 @@
 
 int main(int argc, char *argv[])
 {
+    // chip8 interpreter
+    struct chip8 chip8;
+    chip8_memory_set(&chip8.memory, 0x400, 'Z');
+    // check the memory
+    // printf("%c\n", chip8_memory_get(&chip8.memory, 0x400));
+
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
         EMULATOR_WINDOW_TITLE, 
