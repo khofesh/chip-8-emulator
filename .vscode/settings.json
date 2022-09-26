@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*.yaml": "yaml",
+    "chip8.h": "c"
+  }
+}

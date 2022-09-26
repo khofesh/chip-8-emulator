@@ -27,4 +27,10 @@
 // keyboard
 #define CHIP8_TOTAL_KEYS 16
 
+/*
+    The data should be stored in the interpreter area of Chip-8 memory (0x000 to 0x1FF).
+*/
+// character set
+#define CHIP8_CHARACTER_SET_LOAD_ADDRESS 0x00
+
 #endif // CONFIG_H_INCLUDED
