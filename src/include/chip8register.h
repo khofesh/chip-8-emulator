@@ -15,6 +15,10 @@
     There are also some "pseudo-registers" which are not accessable from Chip-8 programs. 
     The program counter (PC) should be 16-bit, and is used to store the currently executing address. 
     The stack pointer (SP) can be 8-bit, it is used to point to the topmost level of the stack.
+
+    The stack is an array of 16 16-bit values, used to store the address that 
+    the interpreter shoud return to when finished with a subroutine. Chip-8 allows for 
+    up to 16 levels of nested subroutines.
 */
 struct chip8_registers
 {

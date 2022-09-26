@@ -21,5 +21,8 @@
 // register
 #define CHIP8_TOTAL_DATA_REGISTERS 16
 
+// stack
+#define CHIP8_TOTAL_STACK_DEPTH 16
+
 
 #endif // CONFIG_H_INCLUDED
