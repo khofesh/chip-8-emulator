@@ -18,5 +18,8 @@
 #define EMULATOR_WINDOW_TITLE "Chip8 Emulator"
 #define CHIP8_WINDOW_MULTIPLIER 10
 
+// register
+#define CHIP8_TOTAL_DATA_REGISTERS 16
+
 
 #endif // CONFIG_H_INCLUDED

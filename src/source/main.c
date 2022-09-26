@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     chip8_memory_set(&chip8.memory, 0x400, 'Z');
     // check the memory
     // printf("%c\n", chip8_memory_get(&chip8.memory, 0x400));
+    // chip8.registers.V[0x0f] = 50;
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
