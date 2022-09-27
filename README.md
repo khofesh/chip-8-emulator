@@ -106,6 +106,16 @@ printf("%x\n", chip8.registers.PC);
     chip8_exec(&chip8, 0xD005);
 ```
 
+## compile and run the emulator
+
+```shell
+make
+
+./build/main roms/TICTAC
+```
+
+![tictac](./images/Screenshot_2022-09-27_14-04-54.png "tictactoe")
+
 # References
 
 - https://github.com/JamesGriffin/CHIP-8-Emulator (this one is written in C++)
