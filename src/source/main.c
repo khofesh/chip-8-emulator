@@ -146,8 +146,8 @@ int main(int argc, char *argv[])
         if (chip8.registers.sound_timer > 0)
         {
             // fprintf(stdout, "\aBeep!\n");
-            // system("beep -f 5000 -l 50 -r 2");
-            toot(5000, 50);
+            system("beep -f 5000 -l 50 -r 2");
+            // toot(5000, 50);
 
             chip8.registers.sound_timer -= 1;
         }
