@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #include "chip8.h"
 #include "toot.h"
@@ -13,9 +14,45 @@ const char keyboard_map[CHIP8_TOTAL_KEYS] = {
 
 int main(int argc, char *argv[])
 {
+    if (argc < 2)
+    {
+        printf("you have to provide a ROM\n");
+        return -1;
+    }
+
+    const char *filename = argv[1];
+    printf("the filename to load is: %s\n", filename);
+
+    FILE *fp = fopen(filename, "r");
+
+    if (fp == NULL)
+    {
+        perror("error opening file");
+        return -1;
+    }
+
+    // end of the file
+    fseek(fp, 0, SEEK_END);
+    long size = ftell(fp);
+
+    // the beginning of the file
+    fseek(fp, 0, SEEK_SET);
+
+    char buf[size];
+    int res = fread(buf, size, 1, fp);
+
+    if (res != 1)
+    {
+        printf("failed to read from file");
+        return -1;
+    }
+
     // chip8 interpreter
     struct chip8 chip8;
     chip8_init(&chip8);
+
+    // load the file to chip8 memory
+    chip8_load(&chip8, buf, size);
 
     // chip8_screen_set(&chip8.screen, 10, 1);
 
@@ -39,9 +76,13 @@ int main(int argc, char *argv[])
     // bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
     // printf("%i\n", (int)is_down);
 
+    /* check delay timer and sound timer */
     // chip8.registers.delay_timer = 255;
-    chip8.registers.sound_timer = 255;
-    chip8_screen_draw_sprite(&chip8.screen, 32, 30, &chip8.memory.memory[0x01], 5);
+    // chip8.registers.sound_timer = 255;
+
+    // chip8_load(&chip8, "hola mundo", sizeof("hola mundo"));
+
+    // chip8_screen_draw_sprite(&chip8.screen, 32, 30, &chip8.memory.memory[0x01], 5);
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
@@ -124,7 +165,7 @@ int main(int argc, char *argv[])
                 #include <unistd.h>
                 sleep(1); --> 1 second
             */
-            sleep(1);
+            sleep(0.1);
             chip8.registers.delay_timer -= 1;
             printf("delay\n");
         }
@@ -137,6 +178,10 @@ int main(int argc, char *argv[])
 
             chip8.registers.sound_timer -= 1;
         }
+
+        unsigned short opcode = chip8_memory_get_short(&chip8.memory, chip8.registers.PC);
+        chip8_exec(&chip8, opcode);
+        chip8.registers.PC += 2;
     }
 
 /* out */

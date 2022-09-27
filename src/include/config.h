@@ -2,15 +2,19 @@
 #define CONFIG_H_INCLUDED
 
 /*
-    The Chip-8 language is capable of accessing up 
-    to 4KB (4,096 bytes) of RAM, from location 0x000 (0) 
-    to 0xFFF (4095). The first 512 bytes, from 0x000 to 0x1FF, 
-    are where the original interpreter was located, 
+    The Chip-8 language is capable of accessing up
+    to 4KB (4,096 bytes) of RAM, from location 0x000 (0)
+    to 0xFFF (4095). The first 512 bytes, from 0x000 to 0x1FF,
+    are where the original interpreter was located,
     and should not be used by programs.
 */
 #define CHIP8_MEMORY_SIZE 4096
 /*
-    The original implementation of the Chip-8 language 
+    0x200 (512) Start of most Chip-8 programs
+*/
+#define CHIP8_PROGRAM_LOAD_ADDRESS 0x200
+/*
+    The original implementation of the Chip-8 language
     used a 64x32-pixel monochrome display with this format:
 */
 #define CHIP8_WIDTH 64

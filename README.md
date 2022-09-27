@@ -8,6 +8,8 @@ sudo dnf install SDL2-devel SDL2_sound-devel SDL2_net-devel
 
 ## beep
 
+we're using `toot` here. if you want to use `beep`, uncomment the `system("bee");` line, then install beep and configure `pcspkr` udev rule.
+
 ```shell
 sudo dnf install beep
 
