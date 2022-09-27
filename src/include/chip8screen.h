@@ -11,5 +11,7 @@ struct chip8_screen
 
 void chip8_screen_set(struct chip8_screen *screen, int x, int y);
 bool chip8_screen_is_set(struct chip8_screen *screen, int x, int y);
+/* I change the "const char *sprite" to "unsigned char *sprite", to satisfy gcc */
+bool chip8_screen_draw_sprite(struct chip8_screen *screen, int x, int y, unsigned char *sprite, int num);
 
 #endif // CHIP8SCREEN_H_INCLUDED
