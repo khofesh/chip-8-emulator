@@ -30,6 +30,12 @@ a restart would help
 # usermod -a -G beep fahmad
 ```
 
+## hex editor
+
+```shell
+sudo dnf ghex
+```
+
 # References
 
 - https://github.com/JamesGriffin/CHIP-8-Emulator (this one is written in C++)
