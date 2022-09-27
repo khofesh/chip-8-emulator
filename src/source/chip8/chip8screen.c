@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <memory.h>
 
 #include "chip8.h"
 
@@ -46,4 +47,9 @@ bool chip8_screen_draw_sprite(struct chip8_screen *screen, int x, int y, unsigne
     }
 
     return pixel_collision;
+}
+
+void chip8_screen_clear(struct chip8_screen *screen)
+{
+    memset(screen->pixels, 0, sizeof(screen->pixels));
 }

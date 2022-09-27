@@ -37,4 +37,6 @@
 // character set
 #define CHIP8_CHARACTER_SET_LOAD_ADDRESS 0x00
 
+#define CHIP8_DEFAULT_SPRITE_HEIGHT 5
+
 #endif // CONFIG_H_INCLUDED

@@ -54,35 +54,8 @@ int main(int argc, char *argv[])
     // load the file to chip8 memory
     chip8_load(&chip8, buf, size);
 
-    // chip8_screen_set(&chip8.screen, 10, 1);
-
-    /* check the memory */
-    // chip8_memory_set(&chip8.memory, 0x400, 'Z');
-    // printf("%c\n", chip8_memory_get(&chip8.memory, 0x400));
-
-    /* check the register */
-    // chip8.registers.V[0x0f] = 50;
-
-    /* check the stack */
-    // chip8.registers.SP = 0;
-    // chip8_stack_push(&chip8, 0xff);
-    // chip8_stack_push(&chip8, 0xaa);
-    // printf("%x\n", chip8_stack_pop(&chip8));
-    // printf("%x\n", chip8_stack_pop(&chip8));
-
-    /* check keyboard */
-    // chip8_keyboard_down(&chip8.keyboard, 0x0f);
-    // printf("%x\n", chip8_keyboard_map(keyboard_map, 0xff));
-    // bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
-    // printf("%i\n", (int)is_down);
-
-    /* check delay timer and sound timer */
-    // chip8.registers.delay_timer = 255;
-    // chip8.registers.sound_timer = 255;
-
-    // chip8_load(&chip8, "hola mundo", sizeof("hola mundo"));
-
-    // chip8_screen_draw_sprite(&chip8.screen, 32, 30, &chip8.memory.memory[0x01], 5);
+    // set map
+    chip8_keyboard_set_map(&chip8.keyboard, keyboard_map);
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
@@ -109,7 +82,7 @@ int main(int argc, char *argv[])
             case SDL_KEYDOWN:
             {
                 char key = event.key.keysym.sym;
-                int vkey = chip8_keyboard_map(keyboard_map, key);
+                int vkey = chip8_keyboard_map(&chip8.keyboard, key);
 
                 if (vkey != -1)
                 {
@@ -120,7 +93,7 @@ int main(int argc, char *argv[])
             case SDL_KEYUP:
             {
                 char key = event.key.keysym.sym;
-                int vkey = chip8_keyboard_map(keyboard_map, key);
+                int vkey = chip8_keyboard_map(&chip8.keyboard, key);
 
                 if (vkey != -1)
                 {
@@ -180,8 +153,8 @@ int main(int argc, char *argv[])
         }
 
         unsigned short opcode = chip8_memory_get_short(&chip8.memory, chip8.registers.PC);
-        chip8_exec(&chip8, opcode);
         chip8.registers.PC += 2;
+        chip8_exec(&chip8, opcode);
     }
 
 /* out */
