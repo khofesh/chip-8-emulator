@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "*.yaml": "yaml",
-    "chip8.h": "c"
+    "chip8.h": "c",
+    "unistd.h": "c"
   }
 }

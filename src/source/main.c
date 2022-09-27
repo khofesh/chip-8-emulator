@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 #include "chip8.h"
 
@@ -37,6 +38,7 @@ int main(int argc, char *argv[])
     // bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
     // printf("%i\n", (int)is_down);
 
+    chip8.registers.delay_timer = 255;
     chip8_screen_draw_sprite(&chip8.screen, 32, 30, &chip8.memory.memory[0x01], 5);
 
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -108,6 +110,22 @@ int main(int argc, char *argv[])
         }
 
         SDL_RenderPresent(renderer);
+
+        if (chip8.registers.delay_timer > 0)
+        {
+            /*
+                on windows:
+                #include <Windows.h>
+                Sleep(1000); --> 1000 miliseconds
+
+                on linux:
+                #include <unistd.h>
+                sleep(1); --> 1 second
+            */
+            sleep(1);
+            chip8.registers.delay_timer -= 1;
+            printf("delay\n");
+        }
     }
 
 /* out */
