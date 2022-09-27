@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include "chip8.h"
+#include "toot.h"
 
 const char keyboard_map[CHIP8_TOTAL_KEYS] = {
     SDLK_0, SDLK_1, SDLK_2, SDLK_3, SDLK_4, SDLK_5,
@@ -38,7 +39,8 @@ int main(int argc, char *argv[])
     // bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
     // printf("%i\n", (int)is_down);
 
-    chip8.registers.delay_timer = 255;
+    // chip8.registers.delay_timer = 255;
+    chip8.registers.sound_timer = 255;
     chip8_screen_draw_sprite(&chip8.screen, 32, 30, &chip8.memory.memory[0x01], 5);
 
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -125,6 +127,15 @@ int main(int argc, char *argv[])
             sleep(1);
             chip8.registers.delay_timer -= 1;
             printf("delay\n");
+        }
+
+        if (chip8.registers.sound_timer > 0)
+        {
+            // fprintf(stdout, "\aBeep!\n");
+            // system("beep -f 5000 -l 50 -r 2");
+            toot(5000, 50);
+
+            chip8.registers.sound_timer -= 1;
         }
     }
 
