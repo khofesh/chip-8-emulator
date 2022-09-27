@@ -40,7 +40,7 @@ sudo dnf ghex
 
 ## checking in `main.c`
 
-````clang
+```clang
 // chip8_screen_set(&chip8.screen, 10, 1);
 
 /* check the memory */
@@ -125,4 +125,3 @@ make
 - toot - https://github.com/vareille/toot
 - users and groups management https://wiki.archlinux.org/title/users_and_groups
 - https://stackoverflow.com/questions/10072909/beep-on-linux-in-c
-````
